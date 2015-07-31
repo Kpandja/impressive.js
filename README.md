@@ -17,6 +17,7 @@ Top left corner has some more buttons:
  - `Overview` - switches you from looking at a particular slide to the overview.
  - `Get positions` - downloads the updated element positions as separate JavaScript file.
 
+Note: I experienced best presentation results (in terms of smooth transitions) with Chrome/Chromium. Therefore, I will mainly aim at supporting Chrome/Chromium in this code.
 
 License
 -------
