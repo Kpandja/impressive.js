@@ -30,10 +30,10 @@
 
 <div id="impress">
     
-    <div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
+    <div id="overview" class="step">
     </div>
     
-    <div id="start" class="step slide" data-x="-1000" data-y="-1500">
+    <div id="start" class="step slide">
         <h1>builder4impress</h1>
         <p>This tool allows WYSIWYG editing of impress.js presentations. This is an alpha version.</p>
         <p>Stop your pointer over a slide to activate the controls. </p>
@@ -48,6 +48,7 @@
 </div>
 
 
+<script src="pos.js"></script>
 <script src="js/impress.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
@@ -55,7 +56,7 @@
 <script src="js/builder.js"></script>
 <script>
   
-  var iAPI=impress();
+  var iAPI=impress('impress', positions);
   iAPI.init();
 
 Builder.init({

@@ -70,12 +70,12 @@ Builder=(function(){
     $overview=$('#overview');
 
     $menu=$('<div></div>').addClass('builder-main');
-    $('<div></div>').addClass('builder-bt bt-add').appendTo($menu).text('Add new').on('click',addSlide);
-    $('<div></div>').addClass('builder-bt bt-overview').appendTo($menu).text('Overview').on('click',function(){
+    //$('<div></div>').addClass('builder-bt bt-add').appendTo($menu).text('Add new').on('click',addSlide);
+    $('<a></a>').addClass('builder-bt bt-overview').appendTo($menu).text('Overview').on('click',function(){
       config['goto']('overview');
     });
-    $('<div></div>').addClass('builder-bt bt-download').appendTo($menu).text('Get file').on('click',downloadResults);
-    $('<div></div>').addClass('builder-bt bt-download').appendTo($menu).text('style.css').on('click',downloadStyle);
+    $('<a href="" id="download" download="pos.js" class="builder-bt bt-download">Get positions</a>').appendTo($menu).on('click',downloadPositions);
+    //$('<div></div>').addClass('builder-bt bt-download').appendTo($menu).text('style.css').on('click',downloadStyle);
 
 
     $menu.appendTo('body');
@@ -137,57 +137,35 @@ Builder=(function(){
     }
   })()
 
-  function addSlide(){
-    //query slide id
-    var id,$step;
-    id='builderAutoSlide'+sequence();
-    $step=$('<div></div>').addClass('step builder-justcreated').html('<h1>This is a new step. </h1> How about some contents?');
-    $step[0].id=id;
-    $step[0].dataset.scale=3;
-    $step.insertAfter($('.step:last')); //not too performant, but future proof
-    config.creationFunction($step[0]);
-    // jump to the overview slide to make some room to look around
-    config['goto']('overview');
-  }
-
-
-  function downloadStyle(){
-    var uriContent,content,$doc;
-
-    var BlobBuilder = (function(w) {
-      return w.BlobBuilder || w.WebKitBlobBuilder || w.MozBlobBuilder;
-    })(window);
-    $.get('style.css', function (content) {
-      var bb = new BlobBuilder;
-      bb.append(content);
-      saveAs(bb.getBlob("text/css;charset=utf-8"), "style.css");
-    });
-
-  }
-
-  function downloadResults(){
-    var uriContent,content,$doc;
-
-    var BlobBuilder = (function(w) {
-      return w.BlobBuilder || w.WebKitBlobBuilder || w.MozBlobBuilder;
-    })(window);
-    $doc=$(document.documentElement).clone();
-    //remove all scripting
-    $doc.find('script').remove();
-    //remove all current transforms
-    $doc.find('.step, body, #impress, #impress>div').removeAttr('style');
-    //remove gui
-    $doc.find('.builder-controls, .builder-main').remove();
-    //put overview at the end
-    $doc.find('#overview').appendTo($doc.find('#impress'));
-    //add impress.js simple init
-    $doc.find('body').attr('class','impress-not-supported')[0].innerHTML+='<script src="https://raw.github.com/bartaz/impress.js/master/js/impress.js"></script><script>impress().init()</script>';
-    content=$doc[0].outerHTML;
-    //remove stuff
-    var bb = new BlobBuilder;
-    bb.append(content);
-    saveAs(bb.getBlob("text/html;charset=utf-8"), "presentation.html");
-
+  function downloadPositions(event){
+    var _positionMapping = {
+      x: 'x',
+      y: 'y',
+      z: 'z',
+      scale: 's',
+      rotate: 'r',
+      rotateX: 'rx',
+      rotateY: 'ry',
+      rotateZ: 'rz'
+    };
+	var elements = $('body *');
+	var positions = [];
+	for (var i = 0; i < elements.length; ++i) {
+	  var ielement = elements[i];
+	  var ipos = null;
+	  for (var j in _positionMapping) {
+	    if (j in ielement.dataset) {
+	  	ipos = ipos || {};
+	  	ipos[_positionMapping[j]] = ielement.dataset[j];
+	    }
+	  }
+	  if (ipos) {
+	    ipos.id = ielement.id;
+	    positions.push(ipos);
+	  }
+	}
+    event.target.href = 'data:text/plain;charset=utf-8,'
+		+ encodeURIComponent('var positions = ' + JSON.stringify(positions, null, 2) + ';');
   }
 
   function editContents() {

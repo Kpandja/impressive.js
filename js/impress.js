@@ -217,7 +217,7 @@
     // It's the core `impress` function that returns the impress.js API
     // for a presentation based on the element with given id ('impress'
     // by default).
-    var impress = window.impress = function ( rootId ) {
+    var impress = window.impress = function ( rootId, positions ) {
 
         // If impress.js is not supported by the browser return a dummy API
         // it may not be a perfect solution but we return early and avoid
@@ -292,6 +292,39 @@
                 lastEntered = null;
             }
         };
+
+		// `normalizeElement` normalizes either a provided position
+		// data set or a DOM node to the element format as expected
+		// by `initStep`.
+		var _positionMapping = {
+			x: 'x',
+			y: 'y',
+			z: 'z',
+			s: 'scale',
+			r: 'rotate',
+			rx: 'rotateX',
+			ry: 'rotateY',
+			rz: 'rotateZ'
+		};
+		var normalizeElement = function( el ) {
+			if (el instanceof HTMLElement) {
+				// standard way of impress.js
+				return el;
+			}
+
+			// position element... convert to expected format
+			var node = byId(el.id);
+			if (!node) {
+				console.error('Cannot find element with ID ' + el);
+				return { dataset: {} };
+			}
+			for (var i in el) {
+				if (i in _positionMapping) {
+					node.dataset[_positionMapping[i]] = el[i];
+				}
+			}
+			return node;
+		};
 
         // `initStep` initializes given step element by reading data from its
         // data attributes and setting correct styles.
@@ -392,7 +425,11 @@
             body.classList.add("impress-enabled");
 
             // get and init steps
-            steps = $$(".--x, .--y, .--z", root);
+			if (positions) {
+				steps = positions.map(normalizeElement);
+			} else {
+				steps = $$(".step", root);
+			}
             steps.forEach( initStep );
 
             // set a default initial state of the canvas
