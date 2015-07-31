@@ -1,10 +1,24 @@
 Builder = (function() {
+	var htmlTemplate = ''
+		+ '<div id="builder-main-menu">\n'
+		+ '	<a class="bt-overview">Overview</a>\n'
+		+ '	<a class="bt-download" href="" download="pos.js">Get positions</a>\n'
+		+ '</div>\n'
+		+ '\n'
+		+ '<div id="builder-control-menu">\n'
+		+ '	<a class="bt-movexy" title="Move xy"></a>\n'
+		+ '	<a class="bt-movez" title="Move z"></a>\n'
+		+ '	<a class="bt-rotate" title="Rotate"></a>\n'
+		+ '	<a class="bt-scale" title="Scale"></a>\n'
+		+ '</div>\n';
+
 	var state = {
 			editing: false,
 			$node: false,
 			data: {
 				x: 0,
 				y: 0,
+				z: 0,
 				rotate: 0,
 				scale: 0
 			}
@@ -12,6 +26,7 @@ Builder = (function() {
 		config = {
 			rotateStep: 1,
 			scaleStep: 0.1,
+			zStep: 2,
 			visualScaling: 10,
 			redrawFunction: false,
 			setTransformationCallback: false
@@ -19,6 +34,7 @@ Builder = (function() {
 		defaults = {
 			x: 0,
 			y: 0,
+			z: 0,
 			rotate: 0,
 			scale: 1
 		},
@@ -30,20 +46,22 @@ Builder = (function() {
 		handlers = {},
 		redrawTimeout,
 		//nodes
-		$menu, $controls, $impress, $overview;
+		$controls, $impress, $overview;
 
-	handlers.move = function(x, y) {
+	handlers.movexy = function(x, y) {
 
 		var v = fixVector(x, y);
 
 		state.data.x = (state.data.x) ? (state.data.x) + v.x : v.x;
 		state.data.y = (state.data.y) ? (state.data.y) + v.y : v.y;
 	};
+	handlers.movez = function(x, y) {
+		state.data.z = (state.data.z) ? (state.data.z) + x * config.zStep : x * config.zStep;
+	};
 	handlers.scale = function(x) {
 		state.data.scale -= -x * config.scaleStep * config.visualScaling / 10;
 	};
 	handlers.rotate = function(x) {
-		console.log(state.rotate);
 		state.data.rotate -= -x * config.rotateStep;
 	};
 
@@ -57,10 +75,10 @@ Builder = (function() {
 
 				//setting pu movement scale
 				config.visualScaling = x.scale;
-				console.log(x.scale);
+				//console.log(x.scale);
 				//TODO: implement rotation handling for move
 				config.rotation = ~~(x.rotate.z);
-				console.log('rotate', x.rotate.z);
+				//console.log('rotate', x.rotate.z);
 				//I don't see why I should need translation right now, but who knows...
 			})
 		}
@@ -68,28 +86,22 @@ Builder = (function() {
 		$impress = $('#impress');
 		$overview = $('#overview');
 
-		$menu = $('<div></div>').addClass('builder-main');
-		//$('<div></div>').addClass('builder-bt bt-add').appendTo($menu).text('Add new').on('click',addSlide);
-		$('<a></a>').addClass('builder-bt bt-overview').appendTo($menu).text('Overview').on('click', function() {
+		// register mouse events to control elements
+		var $menu = $(htmlTemplate);
+		$menu.appendTo('body');
+		$('#builder-main-menu .bt-overview').on('click', function() {
 			config['goto']('overview');
 		});
-		$('<a href="" id="download" download="pos.js" class="builder-bt bt-download">Get positions</a>').appendTo($menu).on('click', downloadPositions);
-		//$('<div></div>').addClass('builder-bt bt-download').appendTo($menu).text('style.css').on('click',downloadStyle);
-
-		$menu.appendTo('body');
-
-		$controls = $('<div></div>').addClass('builder-controls').hide();
-
-		$('<div></div>').addClass('bt-move').attr('title', 'Move').data('func', 'move').appendTo($controls);
-		$('<div></div>').addClass('bt-rotate').attr('title', 'Rotate').data('func', 'rotate').appendTo($controls);
-		$('<div></div>').addClass('bt-scale').attr('title', 'Scale').data('func', 'scale').appendTo($controls);
-
-		$('<span></span>').addClass('builder-bt').text('Edit').appendTo($controls).click(editContents);
-		$('<span></span>').addClass('builder-bt').text('Wrap').appendTo($controls).click(wrapContents);
+		$('#builder-main-menu .bt-download').on('click', downloadPositions);
+		$('#builder-control-menu .bt-movexy').data('func', 'movexy');
+		$('#builder-control-menu .bt-movez').data('func', 'movez');
+		$('#builder-control-menu .bt-rotate').data('func', 'rotate');
+		$('#builder-control-menu .bt-scale').data('func', 'scale');
 
 		var showTimer;
 
-		$controls.appendTo('body').on('mousedown', 'div', function(e) {
+		$controls = $('#builder-control-menu');
+		$('#builder-control-menu a').on('mousedown', function(e) {
 			e.preventDefault();
 			mouse.activeFunction = handlers[$(this).data('func')];
 			loadData();
@@ -128,13 +140,6 @@ Builder = (function() {
 
 	}
 
-	var sequence = (function() {
-		var s = 2;
-		return function() {
-			return s++;
-		}
-	})()
-
 	function downloadPositions(event) {
 		var _positionMapping = {
 			x: 'x',
@@ -146,45 +151,31 @@ Builder = (function() {
 			rotateY: 'ry',
 			rotateZ: 'rz'
 		};
+
+		var _getPosition = function(el) {
+			var pos = null;
+			for (var j in _positionMapping) {
+				if (j in el.dataset) {
+					pos = pos || {};
+					pos[_positionMapping[j]] = el.dataset[j];
+				}
+			}
+			return pos;
+		};
+
+		// collect position information of all positioned elements
 		var elements = $('body *');
 		var positions = [];
 		for (var i = 0; i < elements.length; ++i) {
-			var ielement = elements[i];
-			var ipos = null;
-			for (var j in _positionMapping) {
-				if (j in ielement.dataset) {
-					ipos = ipos || {};
-					ipos[_positionMapping[j]] = ielement.dataset[j];
-				}
-			}
+			var ipos = _getPosition(elements[i]);
 			if (ipos) {
-				ipos.id = ielement.id;
+				ipos.id = elements[i].id;
 				positions.push(ipos);
 			}
 		}
+
+		// create data URI to trigger file download
 		event.target.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent('var positions = ' + JSON.stringify(positions, null, 2) + ';');
-	}
-
-	function editContents() {
-		var $t = $(this);
-		if (state.editing === true) {
-			state.editing = false;
-			state.$node.html($t.parent().find('textarea').val());
-			state.$node.removeClass('builder-justcreated');
-			$t.parent().find('textarea').remove();
-			$t.text('Edit');
-		} else {
-			var $txt = $('<textarea>').on('keydown keyup', function(e) {
-				e.stopPropagation();
-			});
-			$t.text('OK');
-			state.editing = true;
-			$t.after($txt.val(state.$node.html()));
-		}
-	}
-
-	function wrapContents() {
-		state.$node.toggleClass('slide');
 	}
 
 	function showControls($where) {
@@ -200,12 +191,13 @@ Builder = (function() {
 	}
 
 	function loadData() {
-		console.log('load', state.$node[0].dataset.x);
+		//console.log('load', state.$node[0].dataset.x);
 		//state.data=state.$node[0].dataset;
 		//add defaults
 
 		state.data.x = parseFloat(state.$node[0].dataset.x) || defaults.x;
 		state.data.y = parseFloat(state.$node[0].dataset.y) || defaults.y;
+		state.data.z = parseFloat(state.$node[0].dataset.z) || defaults.z;
 		state.data.scale = parseFloat(state.$node[0].dataset.scale) || defaults.scale;
 		state.data.rotate = parseFloat(state.$node[0].dataset.rotate) || defaults.rotate;
 
@@ -220,8 +212,9 @@ Builder = (function() {
 			state.$node[0].dataset.rotate = state.data.rotate;
 			state.$node[0].dataset.x = state.data.x;
 			state.$node[0].dataset.y = state.data.y;
+			state.$node[0].dataset.z = state.data.z;
 			/**/
-			console.log(state.data, state.$node[0].dataset, state.$node[0].dataset === state.data);
+			//console.log(state.data, state.$node[0].dataset, state.$node[0].dataset === state.data);
 
 			config.redrawFunction(state.$node[0]);
 			showControls(state.$node);
