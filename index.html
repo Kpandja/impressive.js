@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=1024" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <title>builder4impress - extremely WYSIWYG editor for impress.js | by @naugtur</title>
-    
+
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
 
     <!-- style.css is needed for the presentation to look ok, the rest is up to you -->
     <link href="style.css" rel="stylesheet" />
     <link href="css/builder.css" rel="stylesheet" />
-    
+
     <link rel="shortcut icon" href="favicon.png" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 </head>
@@ -29,21 +29,27 @@
 
 
 <div id="impress">
-    
-    <div id="overview" class="step">
-    </div>
-    
-    <div id="start" class="step slide">
-        <h1>builder4impress</h1>
-        <p>This tool allows WYSIWYG editing of impress.js presentations. This is an alpha version.</p>
-        <p>Stop your pointer over a slide to activate the controls. </p>
-        <p>You can start with changing this slide's contents and add some more after that.</p>
-        <p>use <code>Get file</code> to download your presentation html. <br> You will need <a href="style.css">style.css</a> too.</p>
-        <p>Missing features: delete or rearrange steps, saving to edit later.</p>
-    </div>
 
-   
-    
+<div id="overview" class="step">
+</div>
+
+<div id="start" class="step slide">
+	<h1>impressive.js</h1>
+	<p>This tool allows WYSIWYG positioning of impress.js presentation elements.</p>
+	<p>Stop your pointer over a slide to activate the controls. </p>
+	<p>Adjust the positioning to your liking.</p>
+	<p>Use <code>Get positions</code> to download the position files. Replace the existing <code>pos.js</code> file with the downloaded one to permanently store the new slide positions.</p>
+</div>
+
+<div id="content1" class="step slide">
+	<h1>Content</h1>
+	<p>Just some random content...</p>
+</div>
+
+<div id="content2" class="step slide">
+	<h1>More content</h1>
+	<p>And some more random content for playing around.</p>
+</div>
 
 </div>
 
@@ -53,7 +59,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="js/builder.js"></script>
 <script>
-  
+
   var iAPI=impress('impress', positions);
   iAPI.init();
 
