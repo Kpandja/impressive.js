@@ -28,6 +28,7 @@ Builder = (function() {
 			scaleStep: 0.1,
 			zStep: 2,
 			visualScaling: 10,
+			rotation: 0,
 			redrawFunction: false,
 			setTransformationCallback: false
 		},
@@ -49,9 +50,7 @@ Builder = (function() {
 		$controls, $impress, $overview;
 
 	handlers.movexy = function(x, y) {
-
 		var v = fixVector(x, y);
-
 		state.data.x = (state.data.x) ? (state.data.x) + v.x : v.x;
 		state.data.y = (state.data.y) ? (state.data.y) + v.y : v.y;
 	};
@@ -117,7 +116,7 @@ Builder = (function() {
 			$(document).off('mousemove.handler1');
 		});
 
-		$('body').on('mouseenter', '.step', function() {
+		$('.step, .sprite').on('mouseenter', function() {
 			var $t = $(this);
 			showTimer = setTimeout(function() {
 				if (!mouse.activeFunction) {
@@ -127,7 +126,7 @@ Builder = (function() {
 				}
 			}, 500);
 			$t.data('showTimer', showTimer);
-		}).on('mouseleave', '.step', function() {
+		}).on('mouseleave', function() {
 			//not showing when not staying
 			clearTimeout($(this).data('showTimer'));
 		});
@@ -179,10 +178,11 @@ Builder = (function() {
 	}
 
 	function showControls($where) {
-		var top, left, pos = $where.offset();
+		var top, left, pos = $where.offset(), data = $where.data();
+		var scale = data && data.scale ? data.scale : 1;
 		//not going out the edges (at least one way)
-		top = (pos.top > 0) ? pos.top + (100 / config.visualScaling) : 0;
-		left = (pos.left > 0) ? pos.left + (100 / config.visualScaling) : 0;
+		top = (pos.top > 0) ? pos.top : 0;
+		left = (pos.left > 0) ? pos.left : 0;
 
 		$controls.show().offset({
 			top: top,
