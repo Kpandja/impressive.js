@@ -315,7 +315,7 @@
 			// position element... convert to expected format
 			var node = byId(el.id);
 			if (!node) {
-				console.error('Cannot find element with ID ' + el);
+				console.error('Cannot find element with ID ' + el.id);
 				return {
 					dataset: {}
 				};
@@ -429,12 +429,23 @@
 			body.classList.add("impress-enabled");
 
 			// get and init steps
+			steps = $$(".step, .sprite", root);
 			if (positions) {
-				steps = positions.map(normalizeElement);
-			} else {
-				steps = $$(".step", root);
+				// map given position onto correct order as specified in the HTML document
+				var positionMap = {};
+				positions.forEach(function(ielement) {
+					positionMap[ielement.id] = normalizeElement(ielement);
+				});
+				steps = steps.map(function(ielement) {
+					return positionMap[ielement.id] || ielement;
+				});
 			}
 			steps.forEach(initStep);
+
+			// remove sprite elements from list of steps
+			steps = steps.filter(function(istep) {
+				return istep.classList.contains('step');
+			});
 
 			// set a default initial state of the canvas
 			currentState = {
