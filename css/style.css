@@ -100,7 +100,7 @@ a:hover {
 
 h1,h2,h3,h4,h5,h6{
 	font-weight: bold;
-	padding: .2em 0 .2em 0;
+	padding: .2em 0 .8em 0;
 	text-align: center;
 }
 h1 { font-size: 1.5em; }
@@ -172,8 +172,8 @@ p {
 .slide {
 	display: block;
 
-	width: 900px;
-	height: 700px;
+	width: 700px;
+	height: 500px;
 
 	padding: 40px 60px;
 

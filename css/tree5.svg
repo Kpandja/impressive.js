@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="44.44698mm"
+   height="70.956917mm"
+   viewBox="0 0 157.4893 251.42215"
+   id="svg6641"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="tree5.svg">
+  <defs
+     id="defs6643" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="-441.96964"
+     inkscape:cy="19.996789"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1680"
+     inkscape:window-height="983"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata6646">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-129.82678,-300.93685)">
+    <g
+       transform="matrix(0.125,0,0,-0.125,-577.79841,941.19895)"
+       id="g6626">
+      <path
+         inkscape:connector-curvature="0"
+         id="path108"
+         style="fill:#9aaf4f;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         d="m 5665.53,4649.3 c -16.55,-67 13.53,-134.55 69.56,-168.53 -54.19,-36.88 -80.71,-105.92 -60.72,-171.95 20.01,-66.04 80.38,-108.76 145.91,-109.36 -27.75,-59.37 -15.27,-132.26 35.66,-178.82 50.93,-46.55 124.65,-52.43 181.28,-19.46 6.49,-65.22 54.45,-121.51 122.01,-135.53 44.91,-9.28 89.19,2.13 123.27,27.55 33.47,-26.21 77.48,-38.69 122.6,-30.46 67.87,12.4 117.15,67.55 125.16,132.58 55.84,-34.3 129.68,-30.15 181.72,15.19 52.01,45.32 66.2,117.89 39.87,177.91 65.53,-0.97 126.89,40.32 148.45,105.87 21.58,65.53 -3.31,135.19 -56.61,173.3 56.82,32.67 88.48,99.5 73.54,166.87 -14.94,67.37 -71.93,114.52 -137.22,120.06 32.17,57.11 25.23,130.75 -22.03,181.02 -47.28,50.28 -120.32,61.7 -179.3,33.11 -1.52,65.52 -45.1,125.28 -111.41,144.34 -66.3,19.08 -134.97,-8.41 -171.05,-63.12 -34.78,55.54 -102.77,84.64 -169.52,67.17 -66.74,-17.48 -111.72,-76.2 -114.81,-141.66 -58.27,29.98 -131.58,20.26 -180.03,-28.87 -48.45,-49.13 -57.1,-122.56 -26.31,-180.41 -65.4,-4.01 -123.48,-49.82 -140.02,-116.8" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path110"
+         style="fill:#3a2113;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         d="m 6204.18,3141.66 c 21.32,-35.49 105.91,-38.85 145.56,-18.22 41.27,21.45 23.71,108.5 19.66,158.09 -8.83,108.8 -37.6,218.26 -42.73,326.32 -4.13,87.1 -9.64,167.36 -15.64,252.51 -2.71,38.23 -18.89,72.77 3.52,107.06 20.62,31.54 66.78,57.56 94.68,81.11 62.07,52.42 199.94,182.25 158.18,272.39 -70.91,-32.42 -105.68,-127.78 -158.07,-183.9 -43.56,-46.65 -56.85,-29.23 -38.96,30.59 17.83,59.65 38.11,116.82 47.6,179.79 3.36,22.34 23.91,141.07 -19.83,133.78 -37.92,-6.31 -58.54,-115.85 -62.72,-144.67 -7.03,-48.52 10.46,-199.93 -47.73,-218.06 -46.66,48.18 -29.76,142.93 -48.32,203.61 -9.34,30.56 -76.57,178.52 -119.17,116.14 -26.1,-38.2 32.53,-131.75 48.89,-165.34 27.59,-56.66 54.4,-114.43 48.93,-178.67 -60.87,-1.64 -107.75,97.77 -164.11,91.75 -66.86,-7.14 23.86,-93.37 49.25,-112.19 34.79,-25.79 87.46,-31.13 111.93,-66.52 18.03,-26.12 18.22,-85.76 18.21,-117.75 -0.03,-91.36 -4.85,-182.89 -4.84,-276.91 0.02,-106.57 14.3,-205.74 -6.2,-310.92 -5.4,-27.68 -16.15,-65.92 -18.09,-87.14 -1.64,-18.14 -9.38,-57.23 0,-72.85" />
+    </g>
+  </g>
+</svg>
