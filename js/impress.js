@@ -804,9 +804,6 @@
 					case 40: // down
 						api.next();
 						break;
-					case 27: // esc
-						api.goto('overview');
-						break;
 				}
 
 				event.preventDefault();
