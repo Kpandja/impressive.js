@@ -2,12 +2,22 @@ impressive.js
 =============
 Based on the idea of impress.js as well as builder4impress, this tool will assist you in arranging the slides (or other sprite elements) of your impress.js presentation.
 
-The main ideas of this project are:
+
+Features
+--------
+
+The main features of this project are:
  - Separate presentation style (=CSS file), element positioning (=JS file), and presentation content (=HTML file)
  - Slide positions can be adjusted visually with the help of features from builder4impress (inline editing has been removed)
  - The element positioning is done via a separate JavaScript file which contains the variable `positions`. This variable contains all position properties (x, y, z, scale, rotation). When adjusting the element positioning, an updated position file can be download directly from within the browser.
  - A navigation menu that contains references to all slides is accessible over the menu icon on the top right.
  - The *mardown* syntax is within the slides to ease the creation process
+
+
+Screenshot
+----------
+
+![Screenshot](./screenshot.png)
 
 
 Usage instructions
