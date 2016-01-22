@@ -4,13 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=1024" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title>builder4impress - extremely WYSIWYG editor for impress.js | by @naugtur</title>
+	<title>impressive.js demo</title>
 
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
 
     <!-- style.css is needed for the presentation to look ok, the rest is up to you -->
-    <link href="style.css" rel="stylesheet" />
-    <link href="css/builder.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
 
     <link rel="shortcut icon" href="favicon.png" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -25,6 +24,13 @@
 <div class="fallback-message">
     <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
     <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+
+
+<a id='menu-button' href="#"></a>
+<div id="menu">
+<a id='menu-close-button' href="#"></a>
+<a id='menu-edit-button' href="#"></a>
 </div>
 
 
@@ -60,25 +66,11 @@ Just some random content...
 
 
 <script src="pos.js"></script>
+<script src="js/marked/lib/marked.js"></script>
 <script src="js/impress.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="js/builder.js"></script>
-<script src="js/marked/lib/marked.js"></script>
-<script>
-
-  var iAPI=impress('impress', positions);
-  $('.step').each(function(idx, inode) {
-	inode.innerHTML = marked(inode.innerHTML);
-  });
-  iAPI.init();
-
-Builder.init({
-  "goto":iAPI['goto'], //it makes me feel better this way
-  creationFunction:iAPI.newStep, //future API method that adds a new step
-  redrawFunction:iAPI.initStep, //future API method that (re)draws the step
-  setTransformationCallback:iAPI.setTransformationCallback //future API method that lets me know when transformations change
-});
-</script>
+<script src="js/init.js"></script>
+<script src="js/init_builder.js"></script>
 
 </body>
 </html>

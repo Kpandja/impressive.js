@@ -207,6 +207,78 @@ p {
 	white-space: nowrap;
 }
 
+/* STYLE RELATED TO THE MENU */
+
+#menu-button,
+#menu #menu-close-button,
+#menu #menu-edit-button {
+	background: center center no-repeat transparent;
+	display: block;
+	width: 40px;
+	height: 40px;
+	top: 10px;
+	right: 10px;
+	opacity: 0.5;
+}
+
+#menu-button {
+	background-image: url(icons/menu.svg);
+	position: fixed;
+	z-index: 100;
+	/*transform: translate3d(0, 0, 0);*/
+}
+
+#menu #menu-close-button,
+#menu #menu-edit-button {
+	position: absolute;
+	padding: 0;
+	border: none;
+}
+
+#menu #menu-close-button {
+	background-image: url(icons/close.svg);
+}
+
+#menu #menu-edit-button {
+	right: 40px;
+	background-image: url(icons/edit.svg);
+}
+
+
+#menu {
+	box-sizing: border-box;
+	padding: 20px 10px 40px 10px;
+	display: block;
+	position: fixed;
+	right: 0;
+	width: 30%;
+	min-width: 200px;
+	max-width: 500px;
+	height: 100%;
+	transform: translate3d(120%, 0, 0);
+	z-index: 101;
+	transition: transform 0.4s ease;
+	background-color: #282828;
+	border-right: solid 1px rgba(0, 0, 0, 0.1);
+	box-shadow: -5px 0px 5px 0px rgba(0,0,0,0.2);
+	overflow: auto;
+}
+
+#menu.visible {
+	transform: translate3d(0, 0, 0);
+}
+
+#menu a {
+	display: block;
+	text-shadow: none;
+	background: none;
+	color: rgba(255, 255, 255, 0.6);
+	font-size: 12px;
+	padding: 7px;
+	border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+}
+
+
 
 /* IMPRESS NOT SUPPORTED STYLES */
 
