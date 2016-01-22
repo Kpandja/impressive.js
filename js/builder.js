@@ -10,6 +10,7 @@ Builder = (function() {
 		+ '	<a class="bt-movez" title="Move z"></a>\n'
 		+ '	<a class="bt-rotate" title="Rotate"></a>\n'
 		+ '	<a class="bt-scale" title="Scale"></a>\n'
+		+ '	<a class="bt-hide" title="Hide item"></a>\n'
 		+ '</div>\n';
 
 	var state = {
@@ -63,6 +64,11 @@ Builder = (function() {
 	handlers.rotate = function(x) {
 		state.data.rotate -= -x * config.rotateStep;
 	};
+	var hideElement = function(x) {
+		if (state.$node && state.$node.length) {
+			state.$node[0].style.display = 'None';
+		}
+	};
 
 	function init(conf) {
 		config = $.extend(config, conf);
@@ -96,6 +102,7 @@ Builder = (function() {
 		$('#builder-control-menu .bt-movez').data('func', 'movez');
 		$('#builder-control-menu .bt-rotate').data('func', 'rotate');
 		$('#builder-control-menu .bt-scale').data('func', 'scale');
+		$('#builder-control-menu .bt-hide').on('click', hideElement);
 
 		var showTimer;
 

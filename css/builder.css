@@ -1,6 +1,5 @@
 /* builder4impress GUI styles */
-.step:hover,
-.sprite:hover {
+.step:hover, .sprite:hover {
   background-color: rgba(255,250,100,0.5) !important;
   opacity: 1 !important;
 }
@@ -16,7 +15,9 @@
 #builder-main-menu .bt-rotate,
 #builder-control-menu .bt-rotate,
 #builder-main-menu .bt-scale,
-#builder-control-menu .bt-scale {
+#builder-control-menu .bt-scale,
+#builder-main-menu .bt-hide,
+#builder-control-menu .bt-hide {
   background-position: 5px center;
   background-repeat: no-repeat;
   padding-left: 31px;
@@ -45,6 +46,10 @@
 #builder-main-menu a.bt-scale,
 #builder-control-menu a.bt-scale {
   background-image: url("icons/scale.svg") !important;
+}
+#builder-main-menu a.bt-hide,
+#builder-control-menu a.bt-hide {
+  background-image: url("icons/hide.svg") !important;
 }
 #builder-main-menu a,
 #builder-control-menu a {
@@ -98,3 +103,11 @@
   left: -8px;
   transform: rotate(312deg);
 }
+
+#builder-control-menu a.bt-hide {
+  cursor: pointer;
+}
+#builder-control-menu a.bt-hide:before {
+  content: '';
+}
+
