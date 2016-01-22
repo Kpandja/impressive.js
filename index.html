@@ -34,21 +34,26 @@
 </div>
 
 <div id="start" class="step slide">
-	<h1>impressive.js</h1>
-	<p>This tool allows WYSIWYG positioning of impress.js presentation elements.</p>
-	<p>Stop your pointer over a slide to activate the controls. </p>
-	<p>Adjust the positioning to your liking.</p>
-	<p>Use <code>Get positions</code> to download the position files. Replace the existing <code>pos.js</code> file with the downloaded one to permanently store the new slide positions.</p>
+# impressive.js#
+This tool allows WYSIWYG positioning of impress.js presentation elements.
+
+Stop your pointer over a slide to activate the controls.
+
+Adjust the positioning to your liking.
+
+Use `Get positions` to download the position files. Replace the existing `pos.js` file with the downloaded one to permanently store the new slide positions.
 </div>
 
 <div id="content1" class="step slide">
-	<h1>Content</h1>
-	<p>Just some random content...</p>
+# Content #
+Just some random content...
 </div>
 
 <div id="content2" class="step slide">
-	<h1>More content</h1>
-	<p>And some more random content for playing around.</p>
+# More content #
+* And some more random content...
+* ... for playing around ...
+* ... this time formatted in markdown syntax
 </div>
 
 </div>
@@ -58,9 +63,13 @@
 <script src="js/impress.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="js/builder.js"></script>
+<script src="js/marked/lib/marked.js"></script>
 <script>
 
   var iAPI=impress('impress', positions);
+  $('.step').each(function(idx, inode) {
+	inode.innerHTML = marked(inode.innerHTML);
+  });
   iAPI.init();
 
 Builder.init({
